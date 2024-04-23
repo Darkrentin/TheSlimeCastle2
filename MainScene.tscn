@@ -1,11 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://2hjub4u2igbn"]
+[gd_scene load_steps=5 format=3 uid="uid://2hjub4u2igbn"]
 
 [ext_resource type="Script" path="res://MainScene.cs" id="1_ginwq"]
 [ext_resource type="PackedScene" uid="uid://cdenhqoo5eaei" path="res://Scenes/Character/Player.tscn" id="2_46l5q"]
+[ext_resource type="PackedScene" uid="uid://dmkehf8lxe5i2" path="res://Scenes/Character/OtherPlayer.tscn" id="3_53gl0"]
 [ext_resource type="PackedScene" uid="uid://d1e5u1xibttpg" path="res://Scenes/TestLvl.tscn" id="3_dvh70"]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_ginwq")
-playerScene = ExtResource("2_46l5q")
+PlayerScene = ExtResource("2_46l5q")
+OtherPlayerScene = ExtResource("3_53gl0")
 
 [node name="TestLvl" parent="." instance=ExtResource("3_dvh70")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true

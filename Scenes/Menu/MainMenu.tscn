@@ -1,0 +1,106 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcbwlownoeptm"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_dblgb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s0ycl"]
+font_size = 30
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_23lil"]
+font_size = 30
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dblgb")
+
+[node name="Host" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.056
+anchor_top = 0.593
+anchor_right = 0.278
+anchor_bottom = 0.889
+offset_left = -0.512001
+offset_top = -0.264038
+offset_right = -0.256104
+offset_bottom = -0.0720215
+text = "Host
+"
+
+[node name="Join" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.722
+anchor_top = 0.593
+anchor_right = 0.944
+anchor_bottom = 0.889
+offset_left = 0.25592
+offset_top = -0.264038
+offset_right = 0.512085
+offset_bottom = -0.0720215
+text = "Join
+"
+
+[node name="Pseudo" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.556
+anchor_top = 0.198
+anchor_right = 0.944
+anchor_bottom = 0.296
+offset_left = -0.512085
+offset_top = -0.304016
+offset_right = 0.511963
+offset_bottom = 0.192001
+
+[node name="IP" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.111
+anchor_top = 0.198
+anchor_right = 0.389
+anchor_bottom = 0.296
+offset_left = 0.127991
+offset_top = -0.304016
+offset_right = -0.128082
+offset_bottom = 0.192001
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.444
+anchor_top = 0.198
+anchor_right = 0.556
+anchor_bottom = 0.296
+offset_left = 0.511963
+offset_top = -0.304016
+offset_right = -0.512085
+offset_bottom = 0.192001
+text = "Pseudo :"
+label_settings = SubResource("LabelSettings_s0ycl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.056
+anchor_top = 0.198
+anchor_right = 0.111
+anchor_bottom = 0.296
+offset_left = -0.512001
+offset_top = -0.304016
+offset_right = 0.127991
+offset_bottom = 0.192001
+text = "IP :"
+label_settings = SubResource("LabelSettings_23lil")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]

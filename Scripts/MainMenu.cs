@@ -17,6 +17,7 @@ public partial class MainMenu : Control
 		Multiplayer.ConnectedToServer += ConnectedToServer;
 		Multiplayer.ConnectionFailed += ConnectionFailed;
 		Ipt = GetNode<LineEdit>("IP");
+		Ipt.Text = ip;
 	}
 
 	private void ConnectionFailed()
@@ -58,6 +59,11 @@ public partial class MainMenu : Control
 		Multiplayer.MultiplayerPeer = peer;
 		GD.Print("Server Created!");
 		sendPlayerInformation(GetNode<LineEdit>("Pseudo").Text,1);
+		
+		var scene = ResourceLoader.Load<PackedScene>("res://Scenes/Menu/Lobby.tscn").Instantiate<Control>();
+		GetTree().Root.AddChild(scene);
+		this.Hide();
+		
 	}
 
 
@@ -69,25 +75,13 @@ public partial class MainMenu : Control
 		peer.Host.Compress(ENetConnection.CompressionMode.RangeCoder);
 		Multiplayer.MultiplayerPeer = peer;
 		GD.Print("Client Created!");
-	}
-
-
-	private void _on_start_pressed()
-	{
-		Rpc("StartGame");
-	}
-
-	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true,TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
-	private void StartGame()
-	{
-		foreach (var P in GameManager.Players)
-		{
-			GD.Print(P.Name+ " Play!");
-		}
-		var scene = ResourceLoader.Load<PackedScene>("res://MainScene.tscn").Instantiate<Node2D>();
+		var scene = ResourceLoader.Load<PackedScene>("res://Scenes/Menu/Lobby.tscn").Instantiate<Control>();
 		GetTree().Root.AddChild(scene);
+		scene.GetNode<Button>("Start").Hide();
 		this.Hide();
 	}
+
+	
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	private void sendPlayerInformation(string name, int id)
 	{

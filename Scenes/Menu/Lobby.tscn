@@ -1,0 +1,95 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu1q0doypcw8i"]
+
+[ext_resource type="Texture2D" uid="uid://dmuemdck2uqmf" path="res://Asset/Menu/BGMenu.jpg" id="1_1tmhv"]
+[ext_resource type="Script" path="res://Scripts/Lobby.cs" id="1_3vplt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_78jkx"]
+font_size = 30
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3vplt")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("1_1tmhv")
+
+[node name="Player" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.056
+anchor_top = 0.099
+anchor_right = 0.319
+anchor_bottom = 0.691
+offset_left = -0.512001
+offset_top = -0.152008
+offset_right = 0.511993
+offset_bottom = 0.231964
+
+[node name="0" type="Label" parent="Player" groups=["NameTag"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.661
+anchor_bottom = 0.117
+offset_right = -256.128
+offset_bottom = -21.928
+text = "Player 1 : Darkrentin"
+label_settings = SubResource("LabelSettings_78jkx")
+
+[node name="1" type="Label" parent="Player" groups=["NameTag"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.125
+anchor_right = 0.661
+anchor_bottom = 0.242
+offset_right = -1.12799
+offset_bottom = 0.071991
+text = "Player 1 : Darkrentin"
+label_settings = SubResource("LabelSettings_78jkx")
+
+[node name="2" type="Label" parent="Player" groups=["NameTag"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 0.661
+anchor_bottom = 0.367
+offset_right = -1.12799
+offset_bottom = 0.071991
+text = "Player 1 : Darkrentin"
+label_settings = SubResource("LabelSettings_78jkx")
+
+[node name="3" type="Label" parent="Player" groups=["NameTag"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.375
+anchor_right = 0.661
+anchor_bottom = 0.492
+offset_top = -1.52588e-05
+offset_right = -1.12799
+offset_bottom = 0.071991
+text = "Player 1 : Darkrentin"
+label_settings = SubResource("LabelSettings_78jkx")
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.778
+anchor_top = 0.79
+anchor_right = 0.944
+anchor_bottom = 0.889
+offset_left = -0.256042
+offset_top = 0.0799866
+offset_right = 0.511963
+offset_bottom = -0.0720215
+text = "Start Game"
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
