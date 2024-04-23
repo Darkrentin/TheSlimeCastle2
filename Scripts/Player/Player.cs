@@ -8,7 +8,7 @@ public partial class Player : CharacterBody2D
 	
 	private AnimatedSprite2D AniSpr;
 	private bool AnimationLock = false;
-	private Vector2 direction;
+	private float direction;
 	private Label Pseu;
 	
 	public override void _Ready()
@@ -40,13 +40,13 @@ public partial class Player : CharacterBody2D
 			// Handle Jump.
 			if (true)
 			{
-				if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+				if (Input.IsActionJustPressed("Jump") && IsOnFloor())
 					velocity.Y = JumpVelocity;
 
-				direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-				if (direction != Vector2.Zero)
+				direction = Input.GetAxis("Left", "Right");
+				if (direction != 0)
 				{
-					velocity.X = direction.X * Speed;
+					velocity.X = direction * Speed;
 				}
 				else
 				{
@@ -66,7 +66,7 @@ public partial class Player : CharacterBody2D
 	{
 		if(!AnimationLock)
 		{
-			if(direction.X!=0)
+			if(direction!=0)
 			{
 				AniSpr.Play("Run");
 			}
@@ -78,11 +78,11 @@ public partial class Player : CharacterBody2D
 	}
 	private void UpdateFacingDir()
 	{
-		if(direction.X>0)
+		if(direction>0)
 		{
 			AniSpr.FlipH = false;
 		}
-		else if(direction.X<0)
+		else if(direction<0)
 		{
 			AniSpr.FlipH = true;
 		}

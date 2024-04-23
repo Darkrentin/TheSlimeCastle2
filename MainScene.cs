@@ -33,7 +33,6 @@ public partial class MainScene : Node2D
 					currentPlayer.GlobalPosition = spawn.GlobalPosition;
 				}
 			}
-
 			index++;
 		}
 	}

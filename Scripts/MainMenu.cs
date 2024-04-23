@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Multi.Scripts;
+using System.Collections.Generic;
 
 public partial class MainMenu : Control
 {
@@ -85,15 +86,23 @@ public partial class MainMenu : Control
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	private void sendPlayerInformation(string name, int id)
 	{
+		//GD.Print($"Info Rec {name} {id}");
 		PlayerInfo playerInfo = new PlayerInfo()
 		{
 			Name = name,
 			Id = id
 		};
-		if (!GameManager.Players.Contains(playerInfo))
+		if (NotIn(GameManager.Players,playerInfo))
 		{
 			GameManager.Players.Add(playerInfo);
 		}
+		
+		string res = "";
+		foreach (var P in GameManager.Players)
+		{
+			res+=$" N:{P.Name} ID:{P.Id}";
+		}
+		GD.Print(res);
 
 		if (Multiplayer.IsServer())
 		{
@@ -102,6 +111,18 @@ public partial class MainMenu : Control
 				Rpc("sendPlayerInformation", P.Name, P.Id);
 			}
 		}
+	}
+	private bool NotIn(List<PlayerInfo> List, PlayerInfo Play)
+	{
+		bool res = true;
+		foreach (var P in GameManager.Players)
+		{
+			if(P.Id==Play.Id)
+			{
+				res = false;
+			}
+		}
+		return res;
 	}
 }
 
