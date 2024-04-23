@@ -114,7 +114,7 @@ region = Rect2(1000, 0, 30, 80)
 atlas = ExtResource("4_aknaw")
 region = Rect2(1120, 0, 30, 80)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_qhdjv"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_kae5t"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -247,7 +247,7 @@ shape = SubResource("CapsuleShape2D_jjkeu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -24)
-sprite_frames = SubResource("SpriteFrames_qhdjv")
+sprite_frames = SubResource("SpriteFrames_kae5t")
 animation = &"Run"
 autoplay = "Idle"
 

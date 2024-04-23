@@ -6,7 +6,7 @@ public partial class MainMenu : Control
 {
 	[Export] public int port = 1234;
 	private string ip = "127.0.0.1";
-	public int MaxPlayers = 2;
+	public int MaxPlayers = 4;
 	private ENetMultiplayerPeer peer;
 	private LineEdit Ipt;
 	// Called when the node enters the scene tree for the first time.
