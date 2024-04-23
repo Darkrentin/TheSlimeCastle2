@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://2hjub4u2igbn"]
+
+[ext_resource type="Script" path="res://MainScene.cs" id="1_ginwq"]
+[ext_resource type="PackedScene" uid="uid://cdenhqoo5eaei" path="res://Scenes/Character/Player.tscn" id="2_46l5q"]
+[ext_resource type="PackedScene" uid="uid://d1e5u1xibttpg" path="res://Scenes/TestLvl.tscn" id="3_dvh70"]
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_ginwq")
+playerScene = ExtResource("2_46l5q")
+
+[node name="TestLvl" parent="." instance=ExtResource("3_dvh70")]

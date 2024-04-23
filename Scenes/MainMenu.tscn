@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcbwlownoeptm"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="1_5dpne"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5dpne")
+
+[node name="Host" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.056
+anchor_top = 0.395
+anchor_right = 0.278
+anchor_bottom = 0.691
+offset_left = -0.512001
+offset_top = 0.0399933
+offset_right = -0.256042
+offset_bottom = 0.231964
+text = "Host
+"
+
+[node name="Join" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.389
+anchor_top = 0.395
+anchor_right = 0.611
+anchor_bottom = 0.691
+offset_left = -0.128082
+offset_top = 0.0399933
+offset_right = 0.127991
+offset_bottom = 0.231964
+text = "Join
+"
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.722
+anchor_top = 0.395
+anchor_right = 0.944
+anchor_bottom = 0.691
+offset_left = 0.255981
+offset_top = 0.0399933
+offset_right = 0.512085
+offset_bottom = 0.231964
+text = "Start
+"
+
+[node name="Pseudo" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.056
+anchor_top = 0.235
+anchor_right = 0.944
+anchor_bottom = 0.333
+offset_left = -0.512001
+offset_top = -0.280014
+offset_right = 0.511963
+offset_bottom = 0.216003
+
+[node name="IP" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.278
+anchor_bottom = 0.099
+offset_right = -0.256042
+offset_bottom = -0.152008
+
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
