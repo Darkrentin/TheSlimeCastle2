@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dmkehf8lxe5i2"]
+[gd_scene load_steps=17 format=3 uid="uid://dmkehf8lxe5i2"]
 
 [ext_resource type="Script" path="res://Scripts/Player/OtherPlayer.cs" id="1_eywft"]
 [ext_resource type="Texture2D" uid="uid://dwdqi1oty5ob5" path="res://Asset/Player/Player2/Outline/120x80_PNGSheets/_Idle.png" id="2_76f7g"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://r6koaevuw3xg" path="res://Asset/Player/Player2/Outline/120x80_PNGSheets/_Jump.png" id="4_dmkgk"]
 [ext_resource type="Texture2D" uid="uid://bfpv70lrqt2la" path="res://Asset/Player/Player2/Outline/120x80_PNGSheets/_Fall.png" id="5_obt8c"]
 [ext_resource type="Texture2D" uid="uid://bqkoic1u41kdt" path="res://Asset/Player/Player2/Outline/120x80_PNGSheets/_Attack.png" id="6_hl8pr"]
-[ext_resource type="PackedScene" uid="uid://cj3tovuqva1tq" path="res://Scenes/StateMachine/CharacterStateMachine.tscn" id="7_x2e8p"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_y2sal"]
 font_size = 10
@@ -15,6 +14,24 @@ shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e53ol"]
 size = Vector2(20, 40)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_783pw"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath("S:scale")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath(".:CurAni")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
+properties/3/path = NodePath(".:direction")
+properties/3/spawn = true
+properties/3/sync = true
+properties/3/watch = false
 
 [sub_resource type="Animation" id="Animation_0xo6t"]
 resource_name = "Idle"
@@ -73,6 +90,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_aggui"]
 resource_name = "Run"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -241,72 +259,6 @@ _data = {
 "Run": SubResource("Animation_aggui")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_31g8j"]
-animation = &"Atk1"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rdxpy"]
-animation = &"JumpDown"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dlx6e"]
-animation = &"JumpUp"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ydh4v"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ey3nk"]
-animation = &"Run"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jrcak"]
-animation = &"Run"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_qc1lh"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_ydh4v")
-blend_point_0/pos = 0.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_ey3nk")
-blend_point_1/pos = 1.0
-blend_point_2/node = SubResource("AnimationNodeAnimation_jrcak")
-blend_point_2/pos = -1.0
-blend_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1lns4"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jqoai"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tq5fv"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a6dly"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oh4al"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yq3xy"]
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gt7ox"]
-states/Atk1/node = SubResource("AnimationNodeAnimation_31g8j")
-states/Atk1/position = Vector2(404, 204)
-states/JumpDown/node = SubResource("AnimationNodeAnimation_rdxpy")
-states/JumpDown/position = Vector2(489, 6)
-states/JumpUp/node = SubResource("AnimationNodeAnimation_dlx6e")
-states/JumpUp/position = Vector2(340, 6)
-states/Move/node = SubResource("AnimationNodeBlendSpace1D_qc1lh")
-states/Move/position = Vector2(404, 100)
-transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_1lns4"), "Move", "JumpUp", SubResource("AnimationNodeStateMachineTransition_jqoai"), "JumpDown", "Move", SubResource("AnimationNodeStateMachineTransition_tq5fv"), "JumpUp", "JumpDown", SubResource("AnimationNodeStateMachineTransition_a6dly"), "Move", "Atk1", SubResource("AnimationNodeStateMachineTransition_oh4al"), "Atk1", "Move", SubResource("AnimationNodeStateMachineTransition_yq3xy")]
-graph_offset = Vector2(-124, -102)
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_783pw"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = false
-properties/1/path = NodePath("S:scale")
-properties/1/spawn = true
-properties/1/sync = true
-properties/1/watch = false
-properties/2/path = NodePath("CharacterStateMachine:NameState")
-properties/2/spawn = true
-properties/2/sync = true
-properties/2/watch = false
-
 [node name="OtherPlayer" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_eywft")
 
@@ -324,16 +276,6 @@ vertical_alignment = 1
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_e53ol")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_m1siq")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_gt7ox")
-anim_player = NodePath("../AnimationPlayer")
-parameters/Move/blend_position = 0
-
 [node name="S" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="S"]
@@ -344,4 +286,7 @@ hframes = 4
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_783pw")
 
-[node name="CharacterStateMachine" parent="." instance=ExtResource("7_x2e8p")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m1siq")
+}

@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://vrpo4txedixs"]
-
-[ext_resource type="Script" path="res://Scripts/StateMachine/Attack.cs" id="1_t5ruw"]
-
-[node name="Attack" type="Node" node_paths=PackedStringArray("ReturnState")]
-script = ExtResource("1_t5ruw")
-ReturnState = NodePath("")
-CanMove = false

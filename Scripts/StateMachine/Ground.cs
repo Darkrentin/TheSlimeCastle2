@@ -37,8 +37,12 @@ public partial class Ground : State
 		if (!Player.IsOnFloor())
 		{
 			NextState = AirState;
-			NameState = "Air";
+			(Player as AllPlayer).CurAni = "JumpDown";
 			PlayBack.Travel("JumpDown");
+		}
+		else
+		{
+			(Player as AllPlayer).CurAni = "Idle";
 		}
 	}
 
@@ -46,7 +50,7 @@ public partial class Ground : State
 	{
 		Player.Velocity= new Vector2(Player.Velocity.X,JumpVelocity);
 		NextState = AirState;
-		NameState = "Air";
+		(Player as AllPlayer).CurAni = "JumpUp";
 		PlayBack.Travel("JumpUp");
 		
 	}
@@ -54,7 +58,7 @@ public partial class Ground : State
 	private void attack()
 	{
 		NextState = AttackState;
-		NameState = "Attack";
+		(Player as AllPlayer).CurAni = "Atk1";
 		PlayBack.Travel("Atk1");
 	}
 }

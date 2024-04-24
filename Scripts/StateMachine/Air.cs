@@ -23,17 +23,19 @@ public partial class Air : State
 		if (Player.IsOnFloor())
 		{
 			NextState = GroundState;
-			NameState = "Ground";
+			(Player as AllPlayer).CurAni = "Idle";
 			PlayBack.Travel("Move");
 		}
 		else
 		{
 			if(Player.Velocity.Y<0)
 			{
+				(Player as AllPlayer).CurAni = "JumpUp";
 				PlayBack.Travel("JumpUp");
 			}
 			else
 			{
+				(Player as AllPlayer).CurAni = "JumpDown";
 				PlayBack.Travel("JumpDown");
 			}
 		}

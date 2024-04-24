@@ -22,9 +22,8 @@ public partial class Attack : State
 		if(anim_name=="Atk1")
 		{
 			NextState = ReturnState;
-			NameState = "Ground";
+			(Player as AllPlayer).CurAni = "Idle";
 			PlayBack.Travel("Move");
 		}
 	}
 }
-

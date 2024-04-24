@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxrevjvnmppf0"]
-
-[ext_resource type="Script" path="res://Scripts/StateMachine/Air.cs" id="1_fjl6m"]
-
-[node name="Air" type="Node" node_paths=PackedStringArray("GroundState")]
-script = ExtResource("1_fjl6m")
-GroundState = NodePath("")

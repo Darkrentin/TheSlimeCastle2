@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cdenhqoo5eaei"]
+[gd_scene load_steps=35 format=3 uid="uid://cdenhqoo5eaei"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_0854a"]
 [ext_resource type="Texture2D" uid="uid://bqkoic1u41kdt" path="res://Asset/Player/Player2/Outline/120x80_PNGSheets/_Attack.png" id="2_2ru4p"]
@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bfpv70lrqt2la" path="res://Asset/Player/Player2/Outline/120x80_PNGSheets/_Fall.png" id="3_551il"]
 [ext_resource type="Texture2D" uid="uid://r6koaevuw3xg" path="res://Asset/Player/Player2/Outline/120x80_PNGSheets/_Jump.png" id="4_0f2th"]
 [ext_resource type="Texture2D" uid="uid://33qoixfixxlw" path="res://Asset/Player/Player2/Outline/120x80_PNGSheets/_Run.png" id="5_7smqx"]
-[ext_resource type="PackedScene" uid="uid://cj3tovuqva1tq" path="res://Scenes/StateMachine/CharacterStateMachine.tscn" id="7_otvqk"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/CharacterStateMachine.cs" id="8_j60aa"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/Ground.cs" id="9_edqch"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/Air.cs" id="10_34601"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/Attack.cs" id="10_ayhum"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ieuj"]
 size = Vector2(20, 40)
@@ -68,6 +71,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_aggui"]
 resource_name = "Run"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -286,7 +290,7 @@ states/JumpUp/position = Vector2(340, 6)
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_qc1lh")
 states/Move/position = Vector2(404, 100)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_1lns4"), "Move", "JumpUp", SubResource("AnimationNodeStateMachineTransition_jqoai"), "JumpDown", "Move", SubResource("AnimationNodeStateMachineTransition_tq5fv"), "JumpUp", "JumpDown", SubResource("AnimationNodeStateMachineTransition_a6dly"), "Move", "Atk1", SubResource("AnimationNodeStateMachineTransition_oh4al"), "Atk1", "Move", SubResource("AnimationNodeStateMachineTransition_yq3xy")]
-graph_offset = Vector2(-124, -102)
+graph_offset = Vector2(-157, -64)
 
 [sub_resource type="LabelSettings" id="LabelSettings_6flnv"]
 font_size = 10
@@ -300,10 +304,14 @@ properties/1/path = NodePath("S:scale")
 properties/1/spawn = true
 properties/1/sync = true
 properties/1/watch = false
-properties/2/path = NodePath("CharacterStateMachine:NameState")
+properties/2/path = NodePath(".:CurAni")
 properties/2/spawn = true
 properties/2/sync = true
 properties/2/watch = false
+properties/3/path = NodePath(".:direction")
+properties/3/spawn = true
+properties/3/sync = true
+properties/3/watch = false
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_0854a")
@@ -330,10 +338,8 @@ parameters/Move/blend_position = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="S"]
 position = Vector2(5, -24)
-texture = ExtResource("2_4xsal")
+texture = ExtResource("5_7smqx")
 hframes = 10
-
-[node name="CharacterStateMachine" parent="." instance=ExtResource("7_otvqk")]
 
 [node name="debug" type="Label" parent="."]
 offset_left = -24.0
@@ -347,3 +353,22 @@ vertical_alignment = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_rtv1g")
+
+[node name="CharacterStateMachine" type="Node" parent="."]
+script = ExtResource("8_j60aa")
+
+[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("AirState", "AttackState")]
+script = ExtResource("9_edqch")
+AirState = NodePath("../Air")
+AttackState = NodePath("../Attack")
+
+[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("GroundState")]
+script = ExtResource("10_34601")
+GroundState = NodePath("../Ground")
+
+[node name="Attack" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ReturnState")]
+script = ExtResource("10_ayhum")
+ReturnState = NodePath("../Ground")
+CanMove = false
+
+[connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]

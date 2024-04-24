@@ -7,7 +7,6 @@ public partial class CharacterStateMachine : Node
 {
 	public List<State> states = new List<State>();
 	public State CurrentState;
-	[Export] public string NameState;
 	public CharacterBody2D Player;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -34,7 +33,6 @@ public partial class CharacterStateMachine : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		NameState = CurrentState.NameState;
 		if(CurrentState.NextState!=null)
 		{
 			SwitchState(CurrentState.NextState);

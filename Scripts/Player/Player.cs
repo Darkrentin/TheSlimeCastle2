@@ -28,6 +28,8 @@ public partial class Player : AllPlayer
 
 	public override void _PhysicsProcess(double delta)
 	{	
+		GD.Print($"Dir "+direction);
+		GD.Print($"An "+CurAni);
 		Debug.Text = StateMachine.CurrentState.Name;
 		if (GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() ==
 			Multiplayer.GetUniqueId())
@@ -66,18 +68,6 @@ public partial class Player : AllPlayer
 		
 		
 	}
-
-	private int CaptVelocity()
-	{
-		if (Velocity.Y >= 0)
-		{
-			return 1;
-		}
-		else
-		{
-			return -1;
-		}
-	}
 	private void UpdateFacingDir()
 	{
 		if(direction<0)
@@ -90,24 +80,5 @@ public partial class Player : AllPlayer
 		}
 	}
 
-	private void Jump(Vector2 velocity)
-	{
-		/*
-		if(velocity.Y<0)
-		{
-			AniSpr.Play("JumpUp");
-		}
-		else if(velocity.Y==0)
-		{
-			AniSpr.Play("Idle");
-		}
-		else
-		{
-			AniSpr.Play("JumpDown");
-		}
-		AnimationLock = true;
-		*/
-		
-	}
 }
 
