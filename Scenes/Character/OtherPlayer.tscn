@@ -237,7 +237,7 @@ properties/3/watch = false
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rbiet"]
 size = Vector2(20, 40)
 
-[node name="OtherPlayer" type="CharacterBody2D"]
+[node name="OtherPlayer" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_pxaop")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

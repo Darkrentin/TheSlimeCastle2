@@ -328,7 +328,7 @@ properties/3/watch = false
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_byjtp"]
 size = Vector2(20, 40)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_0854a")
 Speed = 200.0
 JumpVelocity = -300.0

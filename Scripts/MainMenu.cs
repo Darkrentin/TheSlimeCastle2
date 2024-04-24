@@ -2,14 +2,16 @@ using Godot;
 using System;
 using Multi.Scripts;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class MainMenu : Control
 {
 	[Export] public int port = 1234;
 	private string ip = "127.0.0.1";
 	public int MaxPlayers = 4;
-	private ENetMultiplayerPeer peer;
+	public ENetMultiplayerPeer peer;
 	private LineEdit Ipt;
+	private Label ErrorMsg;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -19,6 +21,7 @@ public partial class MainMenu : Control
 		Multiplayer.ConnectionFailed += ConnectionFailed;
 		Ipt = GetNode<LineEdit>("IP");
 		Ipt.Text = ip;
+		ErrorMsg = GetNode<Label>("Error");
 	}
 
 	private void ConnectionFailed()
@@ -35,6 +38,19 @@ public partial class MainMenu : Control
 	private void PeerDisconnected(long id)
 	{
 		GD.Print("Peer Disconnected!" + id.ToString());
+		if(id==1)
+		{
+			GetTree().Quit();
+		}
+		GameManager.Players.Remove(GameManager.Players.Where(i => i.Id == id).First<PlayerInfo>());
+		var players = GetTree().GetNodesInGroup("Player");
+		foreach(var p in players)
+		{
+			if(p.Name == id.ToString())
+			{
+				p.QueueFree();
+			}
+		}
 	}
 
 	private void PeerConnected(long id)
@@ -86,7 +102,7 @@ public partial class MainMenu : Control
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer)]
 	private void sendPlayerInformation(string name, int id)
 	{
-		//GD.Print($"Info Rec {name} {id}");
+		GD.Print($"Info Rec {name} {id}");
 		PlayerInfo playerInfo = new PlayerInfo()
 		{
 			Name = name,
@@ -123,6 +139,11 @@ public partial class MainMenu : Control
 			}
 		}
 		return res;
+	}
+	
+	public void DisplayError()
+	{
+		ErrorMsg.Text = "ERROR: NO PARTY FOUND";
 	}
 }
 
