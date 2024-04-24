@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://2hjub4u2igbn"]
+[gd_scene load_steps=7 format=3 uid="uid://2hjub4u2igbn"]
 
 [ext_resource type="Script" path="res://MainScene.cs" id="1_ginwq"]
 [ext_resource type="PackedScene" uid="uid://cdenhqoo5eaei" path="res://Scenes/Character/Player.tscn" id="2_46l5q"]
 [ext_resource type="PackedScene" uid="uid://dmkehf8lxe5i2" path="res://Scenes/Character/OtherPlayer.tscn" id="3_53gl0"]
 [ext_resource type="PackedScene" uid="uid://d1e5u1xibttpg" path="res://Scenes/TestLvl.tscn" id="3_dvh70"]
+[ext_resource type="PackedScene" uid="uid://b7ia2ghmjytfj" path="res://Scenes/Object/Spike.tscn" id="5_5ww3b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ync83"]
+size = Vector2(1120, 8)
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_ginwq")
@@ -16,3 +20,9 @@ OtherPlayerScene = ExtResource("3_53gl0")
 zoom = Vector2(4, 4)
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+
+[node name="Spike" parent="." instance=ExtResource("5_5ww3b")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike"]
+position = Vector2(576, 596)
+shape = SubResource("RectangleShape2D_ync83")

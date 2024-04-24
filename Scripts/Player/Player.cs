@@ -28,8 +28,6 @@ public partial class Player : AllPlayer
 
 	public override void _PhysicsProcess(double delta)
 	{	
-		GD.Print($"Dir "+direction);
-		GD.Print($"An "+CurAni);
 		Debug.Text = StateMachine.CurrentState.Name;
 		if (GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() ==
 			Multiplayer.GetUniqueId())
