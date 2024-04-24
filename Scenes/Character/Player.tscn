@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cdenhqoo5eaei"]
+[gd_scene load_steps=40 format=3 uid="uid://cdenhqoo5eaei"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_0854a"]
 [ext_resource type="Texture2D" uid="uid://bqkoic1u41kdt" path="res://Asset/Player/Player2/Outline/120x80_PNGSheets/_Attack.png" id="2_2ru4p"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bfpv70lrqt2la" path="res://Asset/Player/Player2/Outline/120x80_PNGSheets/_Fall.png" id="3_551il"]
 [ext_resource type="Texture2D" uid="uid://r6koaevuw3xg" path="res://Asset/Player/Player2/Outline/120x80_PNGSheets/_Jump.png" id="4_0f2th"]
 [ext_resource type="Texture2D" uid="uid://33qoixfixxlw" path="res://Asset/Player/Player2/Outline/120x80_PNGSheets/_Run.png" id="5_7smqx"]
+[ext_resource type="PackedScene" uid="uid://c7sbttbxyixis" path="res://Scenes/Object/Weapon.tscn" id="7_7exe7"]
+[ext_resource type="Texture2D" uid="uid://cfq5yweqp6nja" path="res://Asset/Player/Player2/Outline/120x80_PNGSheets/_WallSlide.png" id="7_fr0ro"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/CharacterStateMachine.cs" id="8_j60aa"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/Ground.cs" id="9_edqch"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/Air.cs" id="10_34601"]
@@ -67,6 +69,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("S/Weapon/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_aggui"]
@@ -229,6 +243,59 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("S/Weapon/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.375, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_ibb1g"]
+resource_name = "WallSlide"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("S/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_fr0ro")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("S/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("S/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m1siq"]
 _data = {
@@ -237,7 +304,8 @@ _data = {
 "JumpDown": SubResource("Animation_g6nab"),
 "JumpUp": SubResource("Animation_sq4d2"),
 "RESET": SubResource("Animation_yi5kn"),
-"Run": SubResource("Animation_aggui")
+"Run": SubResource("Animation_aggui"),
+"WallSlide": SubResource("Animation_ibb1g")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_31g8j"]
@@ -292,6 +360,9 @@ states/Move/position = Vector2(404, 100)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_1lns4"), "Move", "JumpUp", SubResource("AnimationNodeStateMachineTransition_jqoai"), "JumpDown", "Move", SubResource("AnimationNodeStateMachineTransition_tq5fv"), "JumpUp", "JumpDown", SubResource("AnimationNodeStateMachineTransition_a6dly"), "Move", "Atk1", SubResource("AnimationNodeStateMachineTransition_oh4al"), "Atk1", "Move", SubResource("AnimationNodeStateMachineTransition_yq3xy")]
 graph_offset = Vector2(-157, -64)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bpenj"]
+size = Vector2(40, 40)
+
 [sub_resource type="LabelSettings" id="LabelSettings_6flnv"]
 font_size = 10
 
@@ -313,16 +384,20 @@ properties/3/spawn = true
 properties/3/sync = true
 properties/3/watch = false
 
+[sub_resource type="BoxMesh" id="BoxMesh_uhrm7"]
+size = Vector3(16, 16, 1)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_0854a")
 Speed = 200.0
 JumpVelocity = -300.0
 
 [node name="Coll" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0, -12)
 shape = SubResource("RectangleShape2D_0ieuj")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+position = Vector2(0, -8)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -335,17 +410,25 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Move/blend_position = 0
 
 [node name="S" type="Node2D" parent="."]
+position = Vector2(0, -8)
 
 [node name="Sprite2D" type="Sprite2D" parent="S"]
 position = Vector2(5, -24)
-texture = ExtResource("5_7smqx")
-hframes = 10
+texture = ExtResource("7_fr0ro")
+hframes = 3
+
+[node name="Weapon" parent="S" instance=ExtResource("7_7exe7")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S/Weapon"]
+position = Vector2(35, -4)
+shape = SubResource("RectangleShape2D_bpenj")
+disabled = true
 
 [node name="debug" type="Label" parent="."]
 offset_left = -24.0
-offset_top = -40.0
+offset_top = -48.0
 offset_right = 24.0
-offset_bottom = -17.0
+offset_bottom = -25.0
 text = "State"
 label_settings = SubResource("LabelSettings_6flnv")
 horizontal_alignment = 1
@@ -370,5 +453,11 @@ GroundState = NodePath("../Ground")
 script = ExtResource("10_ayhum")
 ReturnState = NodePath("../Ground")
 CanMove = false
+
+[node name="Target" type="Node2D" parent="."]
+visible = false
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Target"]
+mesh = SubResource("BoxMesh_uhrm7")
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]

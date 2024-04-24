@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7ia2ghmjytfj"]
-
-[ext_resource type="Script" path="res://Scripts/Object/Spike.cs" id="1_vhnml"]
-
-[node name="Spike" type="Area2D"]
-script = ExtResource("1_vhnml")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

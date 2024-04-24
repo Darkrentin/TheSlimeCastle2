@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7sbttbxyixis"]
+
+[ext_resource type="Script" path="res://Scripts/Object/Weapon.cs" id="1_1um1u"]
+
+[node name="Weapon" type="Area2D"]
+script = ExtResource("1_1um1u")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
