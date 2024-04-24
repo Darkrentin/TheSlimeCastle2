@@ -2,15 +2,14 @@ using Godot;
 using System;
 using System.Runtime.CompilerServices;
 
-public partial class Player : AllPlayer
+public partial class OtherPlayer : AllPlayer
 {
 	
 	[Export] public float Speed = 300.0f;
 	[Export] public float JumpVelocity = -400.0f;
 	
+
 	
-	
-	private Label Debug;
 	
 	public override void _Ready()
 	{
@@ -21,14 +20,13 @@ public partial class Player : AllPlayer
 		Face = GetNode<Node2D>("S");
 		StateMachine = GetNode<CharacterStateMachine>("CharacterStateMachine");
 		
-		Debug = GetNode<Label>("debug");
 	}
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
 	public override void _PhysicsProcess(double delta)
 	{	
-		Debug.Text = StateMachine.CurrentState.Name;
+		
 		if (GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() ==
 			Multiplayer.GetUniqueId())
 		{
@@ -67,17 +65,6 @@ public partial class Player : AllPlayer
 		
 	}
 
-	private int CaptVelocity()
-	{
-		if (Velocity.Y >= 0)
-		{
-			return 1;
-		}
-		else
-		{
-			return -1;
-		}
-	}
 	private void UpdateFacingDir()
 	{
 		if(direction<0)
@@ -90,24 +77,5 @@ public partial class Player : AllPlayer
 		}
 	}
 
-	private void Jump(Vector2 velocity)
-	{
-		/*
-		if(velocity.Y<0)
-		{
-			AniSpr.Play("JumpUp");
-		}
-		else if(velocity.Y==0)
-		{
-			AniSpr.Play("Idle");
-		}
-		else
-		{
-			AniSpr.Play("JumpDown");
-		}
-		AnimationLock = true;
-		*/
-		
-	}
 }
 

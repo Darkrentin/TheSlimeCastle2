@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://6gwh5700e43g"]
+
+[ext_resource type="Script" path="res://Scripts/StateMachine/Ground.cs" id="1_xqktf"]
+
+[node name="Ground" type="Node" node_paths=PackedStringArray("AirState", "AttackState")]
+script = ExtResource("1_xqktf")
+AirState = NodePath("")
+AttackState = NodePath("")

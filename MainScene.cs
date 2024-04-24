@@ -13,7 +13,7 @@ public partial class MainScene : Node2D
 		int index = 0;
 		foreach (var P in GameManager.Players)
 		{
-			Player currentPlayer;
+			AllPlayer currentPlayer;
 			if(P.Id==Multiplayer.GetUniqueId())
 			{
 				currentPlayer = PlayerScene.Instantiate<Player>();
@@ -21,7 +21,7 @@ public partial class MainScene : Node2D
 			}
 			else
 			{
-				currentPlayer = OtherPlayerScene.Instantiate<Player>();
+				currentPlayer = OtherPlayerScene.Instantiate<OtherPlayer>();
 				currentPlayer.GetNode<Label>("Pseudo").Text = P.Name;
 			}
 			currentPlayer.Name = P.Id.ToString();
