@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Ground : State
+public partial class Stand : State
 {
 	[Export] public float JumpVelocity = -350.0f;
 	[Export] State AirState;

@@ -4,6 +4,7 @@ using System;
 public partial class Air : State
 {
 	[Export] private State GroundState;
+	[Export] private State WallSlide;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -25,6 +26,12 @@ public partial class Air : State
 			NextState = GroundState;
 			(Player as AllPlayer).CurAni = "Idle";
 			PlayBack.Travel("Move");
+		}
+		else if(Player.Velocity.Y>=0 && ((Player as Player).Right == "FLoor" || (Player as Player).Left == "FLoor"))
+		{
+			NextState = WallSlide;
+			(Player as AllPlayer).CurAni = "WallSlide";
+			PlayBack.Travel("WallSlide");
 		}
 		else
 		{

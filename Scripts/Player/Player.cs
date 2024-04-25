@@ -10,6 +10,11 @@ public partial class Player : AllPlayer
 	public TileMap TileMap;
 	public Node2D Target;
 	
+	public string Center;
+	public string Up;
+	public string Down;
+	public string Left;
+	public string Right;
 	
 	
 	private Label Debug;
@@ -32,33 +37,15 @@ public partial class Player : AllPlayer
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector2I FootPos = TileMap.LocalToMap(GlobalPosition+new Vector2(0,0));
-		TileData Foot = TileMap.GetCellTileData(0, FootPos);
-		Vector2I UnderFootPos = TileMap.LocalToMap(GlobalPosition+new Vector2(0,16));
-		TileData UnderFoot = TileMap.GetCellTileData(0, UnderFootPos);
-		Vector2I UpperFootPos = TileMap.LocalToMap(GlobalPosition+new Vector2(0,-16));
-		TileData UpperFoot = TileMap.GetCellTileData(0, UpperFootPos);
 		
-		string res = "";
-		if(Foot!=null)
-		{
-			res += $" Here: {Foot.GetCustomData("Type").ToString()}";
-		}
-		if(UnderFoot!=null)
-		{
-			res += $" Under: {UnderFoot.GetCustomData("Type").ToString()}";
-		}
-		if(UpperFoot!=null)
-		{
-			res += $" Under: {UpperFoot.GetCustomData("Type").ToString()}";
-		}
-		GD.Print(res);
-		Target.GlobalPosition = new Vector2(8+FootPos.X*16,8+FootPos.Y*16);
 		Debug.Text = StateMachine.CurrentState.Name;
+
+
+		UpdateLocalCell();
 		if (GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() ==
 			Multiplayer.GetUniqueId())
 		{
-			if(Foot!=null && (string)Foot.GetCustomData("Type")=="Spike")
+			if(Center!=null && Center=="Spike")
 			{
 				Death();
 			}
@@ -119,6 +106,48 @@ public partial class Player : AllPlayer
 			}
 			index++;
 		}
+	}
+
+	public void UpdateLocalCell()
+	{
+		Vector2I FootPos = TileMap.LocalToMap(GlobalPosition+new Vector2(0,0));
+		TileData Foot = TileMap.GetCellTileData(0, FootPos);
+		Vector2I UnderFootPos = TileMap.LocalToMap(GlobalPosition+new Vector2(0,16));
+		TileData UnderFoot = TileMap.GetCellTileData(0, UnderFootPos);
+		Vector2I UpperFootPos = TileMap.LocalToMap(GlobalPosition+new Vector2(0,-16));
+		TileData UpperFoot = TileMap.GetCellTileData(0, UpperFootPos);
+		Vector2I LeftFootPos = TileMap.LocalToMap(GlobalPosition+new Vector2(-16,0));
+		TileData LeftFoot = TileMap.GetCellTileData(0, LeftFootPos);
+		Vector2I RightFootPos = TileMap.LocalToMap(GlobalPosition+new Vector2(16,0));
+		TileData RightFoot = TileMap.GetCellTileData(0, RightFootPos);
+		
+		Target.GlobalPosition = new Vector2(8+RightFootPos.X*16,8+RightFootPos.Y*16);
+		Center = "";
+		Down = "";
+		Up = "";
+		Left = "";
+		Right = "";
+		if (Foot != null)
+		{
+			Center = Foot.GetCustomData("Type").ToString();
+		}
+		if (UnderFoot != null)
+		{
+			Down = UnderFoot.GetCustomData("Type").ToString();
+		}
+		if (UpperFoot != null)
+		{
+			Up = UpperFoot.GetCustomData("Type").ToString();
+		}
+		if (LeftFoot != null)
+		{
+			Left = LeftFoot.GetCustomData("Type").ToString();
+		}
+		if (RightFoot != null)
+		{
+			Right = RightFoot.GetCustomData("Type").ToString();
+		}
+		GD.Print($"Center: {Center} Down: {Down} Up: {Up} Left: {Left} Right: {Right}");
 	}
 
 }
