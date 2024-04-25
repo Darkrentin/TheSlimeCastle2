@@ -19,11 +19,29 @@ public partial class Attack : State
 			PlayBack = (AnimationNodeStateMachinePlayback)(Player as AllPlayer).AniTr.Get("parameters/playback");
 		}
 	}
+	public override void StateInput(InputEvent Event)
+	{
+		if (Event.IsActionPressed("Atk1"))
+		{
+			timer.Start();
+		}
+	}
+	
 	private void _on_animation_tree_animation_finished(StringName anim_name)
 	{
 		if(anim_name=="Atk1")
 		{
-			NextState = ReturnState;
+			if (timer.IsStopped())
+			{
+				NextState = ReturnState;
+				(Player as AllPlayer).CurAni = "Idle";
+				PlayBack.Travel("Move");
+			}
+			else
+			{
+				(Player as AllPlayer).CurAni = "Atk2";
+				PlayBack.Travel("Atk2");
+			}
 		}
 		if(anim_name=="Atk2")
 		{
