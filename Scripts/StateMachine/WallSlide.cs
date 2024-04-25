@@ -33,12 +33,10 @@ public partial class WallSlide : State
 		if((Player as Player).Right == "FLoor")
 		{
 			(Player as Player).Face.Scale = new Vector2(-1,1);
-			Player.Velocity = new Vector2(-1,Player.Velocity.Y);
 		}
 		else if((Player as Player).Left == "FLoor")
 		{
 			(Player as Player).Face.Scale = new Vector2(1,1);
-			Player.Velocity = new Vector2(1,Player.Velocity.Y);
 		}
 		else
 		{

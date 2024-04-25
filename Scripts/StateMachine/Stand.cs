@@ -6,6 +6,7 @@ public partial class Stand : State
 	[Export] public float JumpVelocity = -350.0f;
 	[Export] State AirState;
 	[Export] State AttackState;
+	[Export] State CrouchState;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -30,6 +31,10 @@ public partial class Stand : State
 		if (Event.IsActionPressed("Atk1"))
 		{
 			attack();
+		}
+		if(Event.IsActionPressed("Crouch"))
+		{
+			Crouch();
 		}
 	}
 	public override void StateProcess(double delta)
@@ -60,5 +65,12 @@ public partial class Stand : State
 		NextState = AttackState;
 		(Player as AllPlayer).CurAni = "Atk1";
 		PlayBack.Travel("Atk1");
+	}
+	
+	private void Crouch()
+	{
+		NextState = CrouchState;
+		(Player as AllPlayer).CurAni = "Crouch";
+		PlayBack.Travel("Crouch");
 	}
 }

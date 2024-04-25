@@ -81,6 +81,7 @@ public partial class Player : AllPlayer
 	private void UpdateAnimation()
 	{
 		AniTr.Set("parameters/Move/blend_position", direction);
+		AniTr.Set("parameters/Crouch/blend_position", direction);
 		
 		
 	}
@@ -147,7 +148,7 @@ public partial class Player : AllPlayer
 		{
 			Right = RightFoot.GetCustomData("Type").ToString();
 		}
-		GD.Print($"Center: {Center} Down: {Down} Up: {Up} Left: {Left} Right: {Right}");
+		//GD.Print($"Center: {Center} Down: {Down} Up: {Up} Left: {Left} Right: {Right}");
 	}
 
 }
