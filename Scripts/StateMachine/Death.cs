@@ -24,6 +24,9 @@ public partial class Death : State
 		if(anim_name == "Death")
 		{
 			NextState = StandState;
+			(Player as Player).Speed = 200.0f;
+			(Player as Player).JumpVelocity = -400.0f;
+			(Player as Player).gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 			(Player as AllPlayer).CurAni = "Move";
 			PlayBack.Travel("Move");
 			GoDeath();
@@ -40,8 +43,6 @@ public partial class Death : State
 			}
 			index++;
 		}
-		(Player as Player).Speed = 200.0f;
-		(Player as Player).JumpVelocity = -400.0f;
 	}
 	
 }

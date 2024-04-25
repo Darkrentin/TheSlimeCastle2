@@ -47,22 +47,9 @@ public partial class Player : AllPlayer
 		{
 			if(Center!=null && Center=="Spike")
 			{
-				if(StateMachine.CurrentState is Air || StateMachine.CurrentState is Stand)
-				{
-					StateMachine.CurrentState = StateMachine.GetState("Death");
-					StateMachine.CurrentState.PlayBack.Travel("Death");
-					(StateMachine.CurrentState.Player as AllPlayer).CurAni = "Death";
-					Speed = 200.0f;
-					JumpVelocity = -400.0f;
-				}
-				else if (StateMachine.CurrentState is not Death)
-				{
-					StateMachine.CurrentState = StateMachine.GetState("Stand");
-					StateMachine.CurrentState.PlayBack.Travel("Move");
-					(StateMachine.CurrentState.Player as AllPlayer).CurAni = "Move";
-					Speed = 200.0f;
-					JumpVelocity = -400.0f;
-				}
+				StateMachine.CurrentState = StateMachine.GetState("Death");
+				StateMachine.CurrentState.PlayBack.Travel("Death");
+				(StateMachine.CurrentState.Player as AllPlayer).CurAni = "Death";
 			}
 			
 			Vector2 velocity = Velocity;
