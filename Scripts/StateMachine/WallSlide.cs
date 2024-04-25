@@ -22,7 +22,7 @@ public partial class WallSlide : State
 	
 	public override void StateProcess(double delta)
 	{
-		(Player as Player).gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle()/2f;
+		(Player as Player).gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle()/4f;
 		if (Player.IsOnFloor())
 		{
 			NextState = StandState;
