@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 public partial class Player : AllPlayer
 {
 	
-	[Export] public float Speed = 300.0f;
+	[Export] public float Speed = 200.0f;
 	[Export] public float JumpVelocity = -400.0f;
 	public TileMap TileMap;
 	public Node2D Target;

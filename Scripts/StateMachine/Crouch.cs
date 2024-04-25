@@ -28,9 +28,11 @@ public partial class Crouch : State
 	
 	public override void StateProcess(double delta)
 	{
+		(Player as Player).Speed = 75.0f;
 		if (!Player.IsOnFloor())
 		{
 			NextState = AirState;
+			(Player as Player).Speed = 200.0f;
 			(Player as AllPlayer).CurAni = "JumpDown";
 			PlayBack.Travel("JumpDown");
 		}
@@ -43,6 +45,7 @@ public partial class Crouch : State
 	public void Stand()
 	{
 		NextState = GroundState;
+		(Player as Player).Speed = 200.0f;
 		(Player as AllPlayer).CurAni = "Idle";
 		PlayBack.Travel("Move");
 	}
