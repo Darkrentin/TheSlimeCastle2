@@ -47,7 +47,9 @@ public partial class Player : AllPlayer
 		{
 			if(Center!=null && Center=="Spike")
 			{
-				Death();
+				StateMachine.CurrentState = StateMachine.GetState("Death");
+				StateMachine.CurrentState.PlayBack.Travel("Death");
+				(StateMachine.CurrentState.Player as AllPlayer).CurAni = "Death";
 			}
 			
 			Vector2 velocity = Velocity;
@@ -94,18 +96,6 @@ public partial class Player : AllPlayer
 		else if(direction>0)
 		{
 			Face.Scale = new Vector2(1,1);
-		}
-	}
-	public void Death()
-	{
-		int index = 0;
-		foreach (Node2D spawn in GetTree().GetNodesInGroup("Spawn"))
-		{
-			if (int.Parse(spawn.Name) == index)
-			{
-				GlobalPosition = spawn.GlobalPosition;
-			}
-			index++;
 		}
 	}
 

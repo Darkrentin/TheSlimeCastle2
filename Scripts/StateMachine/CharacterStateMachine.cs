@@ -55,4 +55,16 @@ public partial class CharacterStateMachine : Node
 	{
 		CurrentState.StateInput(Event);
 	}
+	
+	public State GetState(string Name)
+	{
+		foreach (var State in states)
+		{
+			if(State.Name==Name)
+			{
+				return State;
+			}
+		}
+		return null;
+	}
 }
