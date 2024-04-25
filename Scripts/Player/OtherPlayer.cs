@@ -19,21 +19,32 @@ public partial class OtherPlayer : AllPlayer
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (Ani.CurrentAnimation != CurAni && CurAni!="Idle")
+		if (Ani.CurrentAnimation != CurAni && (CurAni!="Idle" && CurAni!="Crouch"))
 		{
 			Ani.Play(CurAni);
 		}
 		if (CurAni=="Idle")
+		{
+			if (direction==0 && Ani.CurrentAnimation != "Idle")
 			{
-				if (direction==0 && Ani.CurrentAnimation != "Idle")
-				{
-					Ani.Play("Idle");
-				}
-				else if (direction!=0 && Ani.CurrentAnimation != "Run")
-				{
-					Ani.Play("Run");
-				}
+				Ani.Play("Idle");
 			}
+			else if (direction!=0 && Ani.CurrentAnimation != "Run")
+			{
+				Ani.Play("Run");
+			}
+		}
+		if (CurAni=="Crouch")
+		{
+			if (direction==0 && Ani.CurrentAnimation != "CrouchIdle")
+			{
+				Ani.Play("CrouchIdle");
+			}
+			else if (direction!=0 && Ani.CurrentAnimation != "CrouchWalk")
+			{
+				Ani.Play("CrouchWalk");
+			}
+		}
 		MoveAndSlide();
 		UpdateFacingDir();
 	}

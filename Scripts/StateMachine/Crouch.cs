@@ -5,9 +5,11 @@ public partial class Crouch : State
 {
 	[Export] private State GroundState;
 	[Export] State AirState;
+	private int NbIn = 0;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,7 +22,7 @@ public partial class Crouch : State
 	}
 	public override void StateInput(InputEvent Event)
 	{
-		if(Event.IsActionReleased("Crouch"))
+		if((!Input.IsActionPressed("Crouch")) && (Player as Player).Up=="" && EmptyUp())
 		{
 			Stand();
 		}
@@ -29,7 +31,7 @@ public partial class Crouch : State
 	public override void StateProcess(double delta)
 	{
 		(Player as Player).Speed = 75.0f;
-		if (!Player.IsOnFloor())
+		if (!Player.IsOnFloor() && (Player as Player).Up=="" && EmptyUp())
 		{
 			NextState = AirState;
 			(Player as Player).Speed = 200.0f;
@@ -49,4 +51,26 @@ public partial class Crouch : State
 		(Player as AllPlayer).CurAni = "Idle";
 		PlayBack.Travel("Move");
 	}
+	private void _on_area_2d_body_entered(Node2D body)
+	{
+		if(body is OtherPlayer)
+		{
+			NbIn++;
+		}
+	}
+
+
+	private void _on_area_2d_body_exited(Node2D body)
+	{
+		if(body is OtherPlayer)
+		{
+			NbIn--;
+		}
+	}
+	
+	private bool EmptyUp()
+	{
+		return NbIn==0;
+	}
 }
+
