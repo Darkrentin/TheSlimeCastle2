@@ -19,6 +19,8 @@ public partial class Death : State
 	}
 	private void _on_animation_tree_animation_finished(StringName anim_name)
 	{
+		(Player as Player).Speed = 200.0f;
+		(Player as Player).JumpVelocity = -400.0f;
 		if(anim_name == "Death")
 		{
 			NextState = StandState;
@@ -38,6 +40,8 @@ public partial class Death : State
 			}
 			index++;
 		}
+		(Player as Player).Speed = 200.0f;
+		(Player as Player).JumpVelocity = -400.0f;
 	}
 	
 }
