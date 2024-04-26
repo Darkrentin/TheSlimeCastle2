@@ -10,9 +10,9 @@ script = ExtResource("1_ginwq")
 PlayerScene = ExtResource("2_46l5q")
 OtherPlayerScene = ExtResource("3_53gl0")
 
-[node name="TestLvl" parent="." instance=ExtResource("3_dvh70")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+
+[node name="TestLvl" parent="." instance=ExtResource("3_dvh70")]
