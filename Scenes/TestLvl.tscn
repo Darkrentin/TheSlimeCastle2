@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1e5u1xibttpg"]
+[gd_scene load_steps=8 format=3 uid="uid://d1e5u1xibttpg"]
 
 [ext_resource type="Texture2D" uid="uid://cd6lepeqbpai5" path="res://Asset/Map/Dungeon/16x16 Underground Passage/Tilemap.png" id="1_6jj14"]
 [ext_resource type="PackedScene" uid="uid://bqst15et8otfa" path="res://Scenes/Object/Gate.tscn" id="2_nbu7l"]
+[ext_resource type="PackedScene" uid="uid://d3kqf5o0cqwqp" path="res://Scenes/Object/Lever.tscn" id="3_u3wng"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_2i7ub"]
 tile_data = PackedInt32Array(0, 786432, 1, 2, 786432, 1, 3, 983040, 1)
@@ -449,58 +450,72 @@ texture = ExtResource("1_6jj14")
 2:4/0 = 0
 2:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:4/0/physics_layer_0/angular_velocity = 0.0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:4/0/custom_data_0 = "Poto"
 2:3/0 = 0
 2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:3/0/physics_layer_0/angular_velocity = 0.0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:3/0/custom_data_0 = "Poto"
 2:2/0 = 0
 2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:2/0/physics_layer_0/angular_velocity = 0.0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:2/0/custom_data_0 = "Poto"
 2:1/0 = 0
 2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:1/0/custom_data_0 = "Poto"
 1:1/0 = 0
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:1/0/custom_data_0 = "Poto"
 0:1/0 = 0
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:1/0/custom_data_0 = "Poto"
 1:2/0 = 0
 1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:2/0/custom_data_0 = "Poto"
 0:2/0 = 0
 0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:2/0/physics_layer_0/angular_velocity = 0.0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:2/0/custom_data_0 = "Poto"
 0:7/0 = 0
 0:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:7/0/physics_layer_0/angular_velocity = 0.0
+0:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:7/0/custom_data_0 = "Poto"
 0:8/0 = 0
 0:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:8/0/physics_layer_0/angular_velocity = 0.0
+0:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:8/0/custom_data_0 = "Poto"
 1:8/0 = 0
 1:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:8/0/physics_layer_0/angular_velocity = 0.0
+1:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:8/0/custom_data_0 = "Poto"
 1:7/0 = 0
 1:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:7/0/physics_layer_0/angular_velocity = 0.0
+1:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:7/0/custom_data_0 = "Poto"
 2:7/0 = 0
 2:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:7/0/physics_layer_0/angular_velocity = 0.0
+2:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:7/0/custom_data_0 = "Poto"
 2:8/0 = 0
 2:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:8/0/physics_layer_0/angular_velocity = 0.0
+2:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:8/0/custom_data_0 = "Poto"
 
 [sub_resource type="TileSet" id="TileSet_aovdi"]
@@ -538,3 +553,15 @@ position = Vector2(552, 144)
 
 [node name="Gate2" parent="." instance=ExtResource("2_nbu7l")]
 position = Vector2(1040, 256)
+
+[node name="Lever3" parent="." node_paths=PackedStringArray("LinkedDoor") instance=ExtResource("3_u3wng")]
+position = Vector2(600, 160)
+LinkedDoor = NodePath("../Gate")
+
+[node name="Lever" parent="." node_paths=PackedStringArray("LinkedDoor") instance=ExtResource("3_u3wng")]
+position = Vector2(504, 160)
+LinkedDoor = NodePath("../Gate")
+
+[node name="Lever2" parent="." node_paths=PackedStringArray("LinkedDoor") instance=ExtResource("3_u3wng")]
+position = Vector2(1096, 336)
+LinkedDoor = NodePath("../Gate2")

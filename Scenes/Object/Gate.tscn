@@ -108,8 +108,11 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4wf3"]
 size = Vector2(6, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vd6my"]
-size = Vector2(49, 20)
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_20sft"]
+properties/0/path = NodePath(".:OpenGate")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
 
 [node name="Gate" type="Node2D"]
 script = ExtResource("1_8grxd")
@@ -129,11 +132,5 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_s4wf3")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(4, 6)
-shape = SubResource("RectangleShape2D_vd6my")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_20sft")
